@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b2b"><meta name="description" content="Sorteie times equilibrados para o seu racha, dividindo jogadores por estrelas.">
+<title>Racha — Divisão por Estrelas</title>
+<link rel="icon" href="assets/racha-logo.png">
+<style>
+:root{--navy:#071b2b;--navy2:#0d2b40;--gold:#e6bd62;--cream:#f5f2e9;--muted:#a9bac4;--green:#1d6b4b;--line:#294456}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#153b51 0,#071b2b 55%);color:var(--cream);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1060px;margin:auto;padding:26px 18px 60px}.hero{display:flex;align-items:center;gap:18px;margin-bottom:26px}.logo{width:88px;height:88px;object-fit:cover;border-radius:20px;border:2px solid #b88e3d;box-shadow:0 8px 30px #0006}.eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}.hero h1{font-size:clamp(25px,5vw,40px);line-height:1.05;margin:5px 0}.hero p{margin:7px 0 0;color:var(--muted)}
+.panel{background:#0b2538eF;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 18px 50px #0002}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.section-head h2{font-size:19px;margin:0}.hint{font-size:13px;color:var(--muted);margin:5px 0 0}.list-entry textarea{width:100%;min-height:360px;resize:vertical;background:#071b2b;color:#fff;border:1px solid #345469;border-radius:12px;padding:15px;font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;outline:none}.list-entry textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px #e6bd6222}.list-entry textarea::placeholder{color:#718897}.format-tip{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}.parsed-counts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.parsed-counts span{background:#102f45;border:1px solid #2a4a5e;border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:0;border-radius:11px;padding:13px 18px;font-weight:800;font-size:14px;cursor:pointer;transition:.15s}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.primary{background:linear-gradient(135deg,#f0d38b,#c99a42);color:#172536}.secondary{background:#17394e;color:var(--cream);border:1px solid #36566a}.ghost{background:transparent;color:var(--muted);border:1px solid #36566a}.notice{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.5}.result{margin-top:22px;display:none}.result.show{display:block}.result-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.result-head h2{margin:0;font-size:21px}.teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.team{border-radius:15px;overflow:hidden;background:#102c40;border:1px solid #345064}.team-title{padding:12px 14px;font-weight:850;display:flex;align-items:center;gap:9px;color:#081b29}.dot{width:12px;height:12px;border-radius:50%;background:currentColor;border:1px solid #0003}.team ul{list-style:none;margin:0;padding:10px 14px 14px}.team li{padding:7px 0;border-bottom:1px solid #ffffff14;font-size:14px}.team li:last-child{border:0}.team li span{color:var(--gold);font-size:11px;margin-left:5px}.extras{margin-top:14px;padding:14px;border:1px dashed #587184;border-radius:13px;color:var(--muted);font-size:13px;line-height:1.7}.empty{color:var(--muted);padding:20px;text-align:center}.footer{text-align:center;color:#8197a5;font-size:12px;margin-top:28px}.footer strong{color:var(--gold)}
+@media(max-width:760px){.list-entry textarea{min-height:310px}.wrap{padding:18px 13px 40px}.panel{padding:16px}.hero{gap:13px}.logo{width:68px;height:68px;border-radius:15px}.actions .btn{flex:1}.result-head{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body><main class="wrap">
+<header class="hero"><img class="logo" src="assets/racha-logo.png" alt="Identidade visual do Racha do Eldorado"><div><div class="eyebrow">Racha do Eldorado apresenta</div><h1>Racha — Divisão por Estrelas</h1><p>Monte times equilibrados para a próxima partida.</p></div></header>
+<section class="panel"><div class="section-head"><div><h2>1. Cole a lista de jogadores</h2><p class="hint">Use uma única lista, separando os jogadores por categoria de estrelas.</p></div></div>
+<div class="list-entry"><textarea id="playerList" spellcheck="false" placeholder="5 estrela
+Campelo
+Jp
+Jefferson
+Isaac
+Caio Almeida
+
+4 estrela
+Danilo
+Marcos Galo
+MF
+Leal
+Mathan
+
+3 estrela
+Juan
+Max
+Thiago Alves
+Anderson
+Jonathan Ruth
+
+2 estrela
+Caio Delgado
+Berg
+Fábio
+Koreano
+Ivo
+
+1 estrela
+Elson
+Joaquim
+Philipe Maia
+Augusto
+Sasha"></textarea>
+<div class="format-tip">Formato aceito: escreva <strong>5 estrela</strong>, depois os nomes (um por linha), e repita até <strong>1 estrela</strong>. Pode usar “estrela” ou “estrelas”. Linhas em branco são ignoradas.</div><div class="parsed-counts" id="parsedCounts"><span>Aguardando lista</span></div></div>
+<div class="actions"><button class="btn primary" id="draw">⚽ Sortear times</button><button class="btn secondary" id="clear">Limpar lista</button></div>
+<p class="notice">A quantidade de times é definida pela categoria com menos jogadores. Jogadores excedentes ficam como reservas. Os nomes são processados somente nesta página e não são enviados para um banco de dados.</p>
+</section>
+<section class="result" id="result"><div class="result-head"><h2>2. Resultado do sorteio</h2><div class="actions" style="margin:0"><button class="btn secondary" id="redraw">↻ Novo sorteio</button><button class="btn primary" id="copy">Copiar para WhatsApp</button></div></div><div class="teams" id="teams"></div><div class="extras" id="extras"></div></section>
+<footer class="footer">Feito para os amigos do <strong>Racha do Eldorado</strong> · Gratuito</footer>
+</main>
+<script>
+const colors=[{name:'Branco',bg:'#f4f4ed'},{name:'Preto',bg:'#9aa4aa'},{name:'Azul',bg:'#69b8e8'},{name:'Amarelo',bg:'#f0c84b'},{name:'Rosa',bg:'#ee9bb8'}];
+const fields=[5,4,3,2,1];let lastText='';
+const listInput=document.getElementById('playerList');
+function parseList(){const groups={5:[],4:[],3:[],2:[],1:[]};let current=null;const lines=listInput.value.split(/\r?\n/);for(const raw of lines){const line=raw.trim();if(!line)continue;const header=line.match(/^([1-5])\s*estrela(?:s)?\s*:?$/i);if(header){current=Number(header[1]);continue}if(current===null){throw new Error('A lista precisa começar com um cabeçalho, por exemplo: 5 estrela.')}groups[current].push(line)}return groups}
+function updateCounts(){try{const g=parseList();document.getElementById('parsedCounts').innerHTML=fields.map(s=>`<span>${s} ★: ${g[s].length} jogador${g[s].length===1?'':'es'}</span>`).join('')}catch(e){document.getElementById('parsedCounts').innerHTML='<span>Confira o formato da lista</span>'}}
+listInput.addEventListener('input',updateCounts);
+function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+function doDraw(){let groups;try{groups=parseList()}catch(e){alert(e.message);return}const empty=fields.filter(s=>!groups[s].length);if(empty.length){alert('Ainda faltam jogadores nas categorias: '+empty.map(s=>s+' estrela'+(s>1?'s':'')).join(', ')+'. Informe pelo menos um jogador em cada categoria.');return}
+const teamCount=Math.min(...fields.map(s=>groups[s].length));const teams=Array.from({length:teamCount},()=>[]);const reserves=[];
+fields.forEach(s=>{const shuffled=shuffle(groups[s]);for(let i=0;i<teamCount;i++)teams[i].push({name:shuffled[i],stars:s});shuffled.slice(teamCount).forEach(name=>reserves.push({name,stars:s}))});
+const palette=colors.slice(0,teamCount);const holder=document.getElementById('teams');holder.innerHTML='';let lines=[];
+teams.forEach((team,i)=>{const c=palette[i];const card=document.createElement('article');card.className='team';const head=document.createElement('div');head.className='team-title';head.style.background=c.bg;head.innerHTML='<span class="dot"></span> TIME '+c.name.toUpperCase();const ul=document.createElement('ul');team.forEach(p=>{const li=document.createElement('li');li.textContent=p.name;const tag=document.createElement('span');tag.textContent='★'.repeat(p.stars);li.appendChild(tag);ul.appendChild(li)});card.append(head,ul);holder.appendChild(card);lines.push('TIME '+c.name.toUpperCase()+'\n'+team.map(p=>'• '+p.name).join('\n'))});
+let extraHtml='';if(reserves.length){extraHtml='<strong>Reservas / jogadores excedentes:</strong><br>'+reserves.map(p=>p.name+' ('+p.stars+'★)').join(' · ')}else{extraHtml='<strong>Distribuição completa:</strong> todos os jogadores foram incluídos nos times.'}document.getElementById('extras').innerHTML=extraHtml;
+lastText='⚽ Racha — Divisão por Estrelas\n\n'+lines.join('\n\n')+(reserves.length?'\n\nRESERVAS\n'+reserves.map(p=>'• '+p.name+' ('+p.stars+' estrelas)').join('\n'):'');document.getElementById('result').classList.add('show');document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('draw').addEventListener('click',doDraw);document.getElementById('redraw').addEventListener('click',doDraw);document.getElementById('clear').addEventListener('click',()=>{listInput.value='';updateCounts();document.getElementById('result').classList.remove('show')});document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(lastText);document.getElementById('copy').textContent='Copiado!';setTimeout(()=>document.getElementById('copy').textContent='Copiar para WhatsApp',1800)}catch(e){alert('Não foi possível copiar automaticamente. Selecione e copie o resultado manualmente.')}});updateCounts();
+</script></body></html>
